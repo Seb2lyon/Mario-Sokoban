@@ -16,7 +16,7 @@ void menuJouer(SDL_Surface *ecran)
 
     SDL_EnableKeyRepeat(100, 100);
 
-    // Récupérer le niveau
+    // Catch the level
     fichier = fopen("config/grille.lvl", "r");
     fscanf(fichier, "%d", &numeroGrille);
 
@@ -31,7 +31,7 @@ void menuJouer(SDL_Surface *ecran)
 
     fclose(fichier);
 
-    // Page d'instructions
+    // Instructionns page
     instruction = IMG_Load("images/instructions_jeu.jpg");
     positionInstruction.x = 0;
     positionInstruction.y = 0;
@@ -39,19 +39,19 @@ void menuJouer(SDL_Surface *ecran)
 
     SDL_Flip(ecran);
 
-    // Boucle page d'instruction
+    // Instructions page's loop
     while(infos)
     {
         SDL_WaitEvent(&event);
 
-        // Boucle d'évènements
+        // Events' loop
         switch(event.type)
         {
-            case SDL_KEYDOWN: // Aller page de jeu
+            case SDL_KEYDOWN: // Go to game page
                 infos = 0;
                 break;
 
-            case SDL_MOUSEBUTTONUP: // Aller page de jeu
+            case SDL_MOUSEBUTTONUP: // Go to game page
                 infos = 0;
                 break;
 
@@ -62,28 +62,28 @@ void menuJouer(SDL_Surface *ecran)
 
     SDL_FreeSurface(instruction);
 
-    // Boucle page de jeu
+    // Game page's loop
     while(jeu)
     {
         SDL_WaitEvent(&event);
 
-        // Boucle d'évènements
+        // Events' loop
         switch(event.type)
         {
             case SDL_QUIT:
-                jeu = 0; // Retour menu
+                jeu = 0; // Back to menu
                 break;
 
             case SDL_KEYDOWN:
                 switch(event.key.keysym.sym)
                 {
-                    case SDLK_ESCAPE: // Retour menu
+                    case SDLK_ESCAPE: // Back to menu
                         SDL_EnableKeyRepeat(0, 0);
                         jeu = 0;
                         SDL_EnableKeyRepeat(100, 100);
                         break;
 
-                    case SDLK_PAGEUP: // Grille suivante
+                    case SDLK_PAGEUP: // Next level
                         SDL_EnableKeyRepeat(0, 0);
                         if(numeroGrille < NOMBRE_GRILLES)
                         {
@@ -93,7 +93,7 @@ void menuJouer(SDL_Surface *ecran)
                         SDL_EnableKeyRepeat(100, 100);
                         break;
 
-                    case SDLK_PAGEDOWN: // Grille précédente
+                    case SDLK_PAGEDOWN: // Previous level
                         SDL_EnableKeyRepeat(0, 0);
                         if(numeroGrille >= 2)
                         {
@@ -103,12 +103,12 @@ void menuJouer(SDL_Surface *ecran)
                         SDL_EnableKeyRepeat(100, 100);
                         break;
 
-                    case SDLK_UP: // Touche haut
+                    case SDLK_UP: // Up arrow key
                         orientationMario = 2;
 
-                        if(mario.y - 1 >= 0 && (grille[mario.x][mario.y - 1] == 0 || grille[mario.x][mario.y - 1] == 3)) // Si couloir ou objectif
+                        if(mario.y - 1 >= 0 && (grille[mario.x][mario.y - 1] == 0 || grille[mario.x][mario.y - 1] == 3)) // If corridor or objective
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -118,7 +118,7 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x][mario.y - 1] == 3) // Si Mario va sur un objectif
+                            if(grille[mario.x][mario.y - 1] == 3) // If Mario go to an objective
                             {
                                 mario.objectif = 1;
                             }
@@ -126,9 +126,9 @@ void menuJouer(SDL_Surface *ecran)
                             grille[mario.x][mario.y - 1] = 4;
                             mario.y = mario.y - 1;
                         }
-                        else if(mario.y - 2 < NOMBRE_CASES_L && (grille[mario.x][mario.y - 1] == 2 || grille[mario.x][mario.y - 1] == 5) && (grille[mario.x][mario.y - 2] == 0 || grille[mario.x][mario.y - 2] == 3)) // Si caisse
+                        else if(mario.y - 2 < NOMBRE_CASES_L && (grille[mario.x][mario.y - 1] == 2 || grille[mario.x][mario.y - 1] == 5) && (grille[mario.x][mario.y - 2] == 0 || grille[mario.x][mario.y - 2] == 3)) // If box
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -138,12 +138,12 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x][mario.y - 1] == 5) // Si caisse bien placée
+                            if(grille[mario.x][mario.y - 1] == 5) // If the box is well located
                             {
                                 mario.objectif = 1;
                             }
 
-                            if(grille[mario.x][mario.y - 2] == 3) // Si la caisse va sur un objectif
+                            if(grille[mario.x][mario.y - 2] == 3) // If the box move to an objective
                             {
                                 grille[mario.x][mario.y - 2] = 5;
                             }
@@ -156,12 +156,12 @@ void menuJouer(SDL_Surface *ecran)
                         }
                         break;
 
-                    case SDLK_DOWN: // Touche bas
+                    case SDLK_DOWN: // Down arrow key
                         orientationMario = 1;
 
-                        if(mario.y + 1 < NOMBRE_CASES_H && (grille[mario.x][mario.y + 1] == 0 || grille[mario.x][mario.y + 1] == 3)) // Si couloir ou objectif
+                        if(mario.y + 1 < NOMBRE_CASES_H && (grille[mario.x][mario.y + 1] == 0 || grille[mario.x][mario.y + 1] == 3)) // If corridor or objective
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -171,7 +171,7 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x][mario.y + 1] == 3) // Si Mario va sur un objectif
+                            if(grille[mario.x][mario.y + 1] == 3) // If Mario go to an objective
                             {
                                 mario.objectif = 1;
                             }
@@ -179,9 +179,9 @@ void menuJouer(SDL_Surface *ecran)
                             grille[mario.x][mario.y + 1] = 4;
                             mario.y = mario.y + 1;
                         }
-                        else if(mario.y + 2 < NOMBRE_CASES_L && (grille[mario.x][mario.y + 1] == 2 || grille[mario.x][mario.y + 1] == 5) && (grille[mario.x][mario.y + 2] == 0 || grille[mario.x][mario.y + 2] == 3)) // Si caisse
+                        else if(mario.y + 2 < NOMBRE_CASES_L && (grille[mario.x][mario.y + 1] == 2 || grille[mario.x][mario.y + 1] == 5) && (grille[mario.x][mario.y + 2] == 0 || grille[mario.x][mario.y + 2] == 3)) // If box
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -191,12 +191,12 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x][mario.y + 1] == 5) // Si caisse bien placée
+                            if(grille[mario.x][mario.y + 1] == 5) // If the box is well located
                             {
                                 mario.objectif = 1;
                             }
 
-                            if(grille[mario.x][mario.y + 2] == 3) // Si la caisse va sur un objectif
+                            if(grille[mario.x][mario.y + 2] == 3) // If the box move to an objective
                             {
                                 grille[mario.x][mario.y + 2] = 5;
                             }
@@ -209,12 +209,12 @@ void menuJouer(SDL_Surface *ecran)
                         }
                         break;
 
-                    case SDLK_RIGHT: // Touche droite
+                    case SDLK_RIGHT: // Right arrow key
                         orientationMario = 3;
 
-                        if(mario.x + 1 < NOMBRE_CASES_L && (grille[mario.x + 1][mario.y] == 0 || grille[mario.x + 1][mario.y] == 3)) // Si couloir ou objectif
+                        if(mario.x + 1 < NOMBRE_CASES_L && (grille[mario.x + 1][mario.y] == 0 || grille[mario.x + 1][mario.y] == 3)) // If corridor or objective
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -224,7 +224,7 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x + 1][mario.y] == 3) // Si Mario va sur un objectif
+                            if(grille[mario.x + 1][mario.y] == 3) // If Mario go to an objective
                             {
                                 mario.objectif = 1;
                             }
@@ -232,9 +232,9 @@ void menuJouer(SDL_Surface *ecran)
                             grille[mario.x + 1][mario.y] = 4;
                             mario.x = mario.x + 1;
                         }
-                        else if(mario.x + 2 < NOMBRE_CASES_L && (grille[mario.x + 1][mario.y] == 2 || grille[mario.x + 1][mario.y] == 5) && (grille[mario.x + 2][mario.y] == 0 || grille[mario.x + 2][mario.y] == 3)) // Si caisse
+                        else if(mario.x + 2 < NOMBRE_CASES_L && (grille[mario.x + 1][mario.y] == 2 || grille[mario.x + 1][mario.y] == 5) && (grille[mario.x + 2][mario.y] == 0 || grille[mario.x + 2][mario.y] == 3)) // If box
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -244,12 +244,12 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x + 1][mario.y] == 5) // Si caisse bien placée
+                            if(grille[mario.x + 1][mario.y] == 5) // If the box is well located
                             {
                                 mario.objectif = 1;
                             }
 
-                            if(grille[mario.x + 2][mario.y] == 3) // Si la caisse va sur un objectif
+                            if(grille[mario.x + 2][mario.y] == 3) // If the box move to an objective
                             {
                                 grille[mario.x + 2][mario.y] = 5;
                             }
@@ -262,12 +262,12 @@ void menuJouer(SDL_Surface *ecran)
                         }
                         break;
 
-                    case SDLK_LEFT: // Touche gauche
+                    case SDLK_LEFT: // Left arrow key
                         orientationMario = 4;
 
-                        if(mario.x - 1 >= 0 && (grille[mario.x - 1][mario.y] == 0 || grille[mario.x - 1][mario.y] == 3)) // Si couloir ou objectif
+                        if(mario.x - 1 >= 0 && (grille[mario.x - 1][mario.y] == 0 || grille[mario.x - 1][mario.y] == 3)) // If cooridor or objective
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -277,7 +277,7 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x - 1][mario.y] == 3) // Si Mario va sur un objectif
+                            if(grille[mario.x - 1][mario.y] == 3) // If Mario go to an objective
                             {
                                 mario.objectif = 1;
                             }
@@ -287,7 +287,7 @@ void menuJouer(SDL_Surface *ecran)
                         }
                         else if(mario.x - 2 >= 0 && (grille[mario.x - 1][mario.y] == 2 || grille[mario.x - 1][mario.y] == 5) && (grille[mario.x - 2][mario.y] == 0 || grille[mario.x - 2][mario.y] == 3))
                         {
-                            if(mario.objectif) // Si Mario est sur un objectif
+                            if(mario.objectif) // If Mario is on an objective
                             {
                                 grille[mario.x][mario.y] = 3;
                                 mario.objectif = 0;
@@ -297,12 +297,12 @@ void menuJouer(SDL_Surface *ecran)
                                 grille[mario.x][mario.y] = 0;
                             }
 
-                            if(grille[mario.x - 1][mario.y] == 5) // Si caisse bien placée
+                            if(grille[mario.x - 1][mario.y] == 5) // If the box is well located
                             {
                                 mario.objectif = 1;
                             }
 
-                            if(grille[mario.x - 2][mario.y] == 3) // Si la caisse va sur un objectif
+                            if(grille[mario.x - 2][mario.y] == 3) // If the box move to an objective
                             {
                                 grille[mario.x - 2][mario.y] = 5;
                             }
@@ -338,7 +338,7 @@ void menuJouer(SDL_Surface *ecran)
                 break;
         }
 
-        // Fond
+        // Background
         jouer = SDL_CreateRGBSurface(SDL_HWSURFACE, FENETRE_L, FENETRE_H, 32, 0, 0, 0, 0);
         SDL_FillRect(jouer, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
         positionJouer.x = 0;
@@ -347,7 +347,7 @@ void menuJouer(SDL_Surface *ecran)
 
         if(nouvelleGrille)
         {
-            // Remplissage de la grille
+            // Fill the window
             recupererGrille(grille, numeroGrille);
             orientationMario = 1;
             mario.x = 0;
@@ -379,7 +379,7 @@ void menuJouer(SDL_Surface *ecran)
                         nombreObjectif++;
                         break;
                     case 4:
-                        if(mario.objectif) // Si Mario est sur une case objectif
+                        if(mario.objectif) // If Mario is on an objective
                         {
                             surface = IMG_Load("images/objectif.png");
                             positionSurface.x = j * CASE_L;
@@ -422,7 +422,7 @@ void menuJouer(SDL_Surface *ecran)
 
         SDL_Flip(ecran);
 
-        if(nombreObjectif == 0 && mario.objectif == 0) // Si tous les objectifs sont remplis
+        if(nombreObjectif == 0 && mario.objectif == 0) // If all the objectives are filled
         {
             if(numeroGrille == NOMBRE_GRILLES)
             {

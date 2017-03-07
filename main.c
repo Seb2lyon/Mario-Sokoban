@@ -13,35 +13,35 @@ int main(int argc, char *argv[])
     SDL_Event event = {0};
     int continuer = 1;
 
-    SDL_Init(SDL_INIT_VIDEO); // Initialisation SDL
+    SDL_Init(SDL_INIT_VIDEO); // Initialize SDL
 
-    fenetre = SDL_SetVideoMode(FENETRE_L, FENETRE_H, 32, SDL_HWSURFACE | SDL_DOUBLEBUF); // Création fenêtre
+    fenetre = SDL_SetVideoMode(FENETRE_L, FENETRE_H, 32, SDL_HWSURFACE | SDL_DOUBLEBUF); // Create window
 
-    SDL_WM_SetCaption("Mario Sokoban", NULL); // Titre + icone
+    SDL_WM_SetCaption("Mario Sokoban", NULL); // Title + icon
     SDL_WM_SetIcon(IMG_Load("images/caisse.jpg"), NULL);
 
-    while(continuer) // Boucle de menu
+    while(continuer) // Menu's loop
     {
         SDL_WaitEvent(&event);
 
         switch(event.type)
         {
             case SDL_QUIT:
-                continuer = 0; // Quitter l'application
+                continuer = 0; // Leave the app
                 break;
 
             case SDL_KEYDOWN:
                 if(event.key.keysym.sym == SDLK_ESCAPE)
                 {
-                    continuer = 0; // Quitter l'application
+                    continuer = 0; // Leave the app
                 }
                 else if(event.key.keysym.sym == SDLK_KP1)
                 {
-                    menuJouer(fenetre); // Jeu
+                    menuJouer(fenetre); // Game
                 }
                 else if(event.key.keysym.sym == SDLK_KP2)
                 {
-                    menuEditeur(fenetre); // Editeur
+                    menuEditeur(fenetre); // Editor
                 }
                 break;
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
                 break;
         }
 
-        // Affichage écran de menu
+        // Show menu's screen
         menu = IMG_Load("images/menu.jpg");
         positionMenu.x = 0;
         positionMenu.y = 0;
