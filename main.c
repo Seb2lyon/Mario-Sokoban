@@ -1,3 +1,14 @@
+/*********************************************
+ *          Developped by Seb2lyon           *
+ *  Inspired by M@teo21 from Openclassrooms  *
+ *              ---------------              *
+ *                   v. 1.0                  *
+ *                 08/03/2017                *
+ *              ---------------              *
+ *                  Enjoy ;)                 *
+ *********************************************/
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL.h>
