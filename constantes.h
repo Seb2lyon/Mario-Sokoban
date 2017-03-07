@@ -8,7 +8,7 @@
 #define FENETRE_L CASE_L * NOMBRE_CASES_L
 #define FENETRE_H CASE_H * NOMBRE_CASES_H
 #define NOMBRE_CASES_TOTAL NOMBRE_CASES_H * NOMBRE_CASES_L
-#define NOMBRE_GRILLES 150
+#define NOMBRE_GRILLES 200
 
 typedef struct Personnage Personnage;
 

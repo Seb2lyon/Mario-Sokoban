@@ -19,6 +19,16 @@ void menuJouer(SDL_Surface *ecran)
     // Récupérer le niveau
     fichier = fopen("config/grille.lvl", "r");
     fscanf(fichier, "%d", &numeroGrille);
+
+    if(numeroGrille < 1)
+    {
+        numeroGrille = 1;
+    }
+    else if(numeroGrille > NOMBRE_GRILLES)
+    {
+        numeroGrille = NOMBRE_GRILLES;
+    }
+
     fclose(fichier);
 
     // Page d'instructions
