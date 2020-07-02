@@ -2,8 +2,8 @@
  *          Developped by Seb2lyon           *
  *  Inspired by M@teo21 from Openclassrooms  *
  *              ---------------              *
- *                   v. 1.0                  *
- *                 08/03/2017                *
+ *                   v. 1.1                  *
+ *                 03/07/2020                *
  *              ---------------              *
  *                  Enjoy ;)                 *
  *********************************************/
@@ -46,11 +46,11 @@ int main(int argc, char *argv[])
                 {
                     continuer = 0; // Leave the app
                 }
-                else if(event.key.keysym.sym == SDLK_KP1)
+                else if(event.key.keysym.sym == SDLK_KP1 || event.key.keysym.sym == SDLK_1)
                 {
                     menuJouer(fenetre); // Game
                 }
-                else if(event.key.keysym.sym == SDLK_KP2)
+                else if(event.key.keysym.sym == SDLK_KP2 || event.key.keysym.sym == SDLK_2)
                 {
                     menuEditeur(fenetre); // Editor
                 }

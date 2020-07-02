@@ -85,31 +85,61 @@ void menuEditeur(SDL_Surface *ecran)
                         }
                         break;
 
-                    case SDLK_KP1: // Wall with cursor
+                    case SDLK_KP1: // Wall with cursor (Keypad)
                         SDL_FreeSurface(curseur);
                         curseur = IMG_Load("images/mur.jpg");
                         curseurSurface = 1;
                         break;
 
-                    case SDLK_KP2: // Box with cursor
+                    case SDLK_1: // Wall with cursor (numeric key)
+                        SDL_FreeSurface(curseur);
+                        curseur = IMG_Load("images/mur.jpg");
+                        curseurSurface = 1;
+                        break;
+
+                    case SDLK_KP2: // Box with cursor (Keypad)
                         SDL_FreeSurface(curseur);
                         curseur = IMG_Load("images/caisse.jpg");
                         curseurSurface = 2;
                         break;
 
-                    case SDLK_KP3: // Box OK with cursor
+                    case SDLK_2: // Box with cursor (numeric key)
+                        SDL_FreeSurface(curseur);
+                        curseur = IMG_Load("images/caisse.jpg");
+                        curseurSurface = 2;
+                        break;
+
+                    case SDLK_KP3: // Box OK with cursor (Keypad)
                         SDL_FreeSurface(curseur);
                         curseur = IMG_Load("images/caisse_ok.jpg");
                         curseurSurface = 5;
                         break;
 
-                    case SDLK_KP4: // Objective with cursor
+                    case SDLK_3: // Box OK with cursor (numeric key)
+                        SDL_FreeSurface(curseur);
+                        curseur = IMG_Load("images/caisse_ok.jpg");
+                        curseurSurface = 5;
+                        break;
+
+                    case SDLK_KP4: // Objective with cursor (Keypad)
                         SDL_FreeSurface(curseur);
                         curseur = IMG_Load("images/objectif.png");
                         curseurSurface = 3;
                         break;
 
-                    case SDLK_KP5: // Mario with cursor
+                    case SDLK_4: // Objective with cursor (numeric key)
+                        SDL_FreeSurface(curseur);
+                        curseur = IMG_Load("images/objectif.png");
+                        curseurSurface = 3;
+                        break;
+
+                    case SDLK_KP5: // Mario with cursor (Keypad)
+                        SDL_FreeSurface(curseur);
+                        curseur = IMG_Load("images/mario_bas.gif");
+                        curseurSurface = 4;
+                        break;
+
+                    case SDLK_5: // Mario with cursor (numeric key)
                         SDL_FreeSurface(curseur);
                         curseur = IMG_Load("images/mario_bas.gif");
                         curseurSurface = 4;
